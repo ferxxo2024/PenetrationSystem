@@ -29,7 +29,7 @@ The system is optimized for real-time use. Below are typical performance metrics
 ## Usage
 
 ### Basic Setup
-1. Add the penetration system script as an autoload/singleton in your project
+1. Add the penetration system script or scene (more flexibility) as an autoload/singleton in your project
 2. Configure material properties in the `penetration_data` dictionary
 3. Assign materials to your objects. You can do this in two ways:
    - **Via code:** `collider.set_meta(&"material", &"wood")`

@@ -23,7 +23,7 @@ config/icon="uid://c46eyn00aeal0"
 
 [autoload]
 
-G_PenetrationSystem="*res://addons/penetration_system/penetration_system.gd"
+G_PenetrationSystem="*res://addons/penetration_system/penetration_system.tscn"
 
 [debug_draw_3d]
 
