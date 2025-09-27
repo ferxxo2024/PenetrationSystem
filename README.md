@@ -18,7 +18,9 @@ https://github.com/user-attachments/assets/93f6dd95-38ff-462b-9120-626388da3e35
 ## Performance
 The system is optimized for real-time use. Below are typical performance metrics for different shot counts with 3rd-level penetration:
 
+
 * **1024 shots with 3rd-level penetration** — ~45–49 ms per frame
+* **512 shots with 3rd-level penetration** — ~12.9–22 ms per frame
 * **8 shots with 3rd-level penetration** — ~0.37 ms per frame
 * **1 shot with 3rd-level penetration** — ~0.070–0.130 ms per frame
 
