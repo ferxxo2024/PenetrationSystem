@@ -32,6 +32,8 @@ class_name PenetrationSystem
 @export var debug_output: bool = false  # Enable/disable debug prints
 @export var debug_draw: bool = false  # Enable/disable debug draw
 
+@export_flags_3d_physics var _collision_mask = 1
+
 @export var base_damage: float = 10.0
 @export var max_distance: float = 5.0
 @export var _max_penetrations: int = 4
@@ -89,6 +91,7 @@ func _fire_penetration_ray(origin: Vector3, direction: Vector3, remaining_penetr
 		origin + direction * (max_distance - traveled_distance)
 	)
 	query.exclude = exclude_bodies
+	query.collision_mask = _collision_mask
 	
 	# HACK: RID sucks with multiple collision shapes on one object
 	# Don't use exclude (except player or other body)(RID) - filter results instead
@@ -147,6 +150,7 @@ func _fire_penetration_ray(origin: Vector3, direction: Vector3, remaining_penetr
 	var forward_check_point: Vector3 = hit_position + direction * penetration_info.max_thickness
 	var forward_query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(hit_position, forward_check_point)
 	forward_query.exclude = exclude_bodies
+	forward_query.collision_mask = _collision_mask
 	
 	var forward_hit = space_state.intersect_ray(forward_query)
 	
@@ -160,6 +164,7 @@ func _fire_penetration_ray(origin: Vector3, direction: Vector3, remaining_penetr
 		# Check thickness with reverse ray
 		var reverse_query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(forward_check_point, hit_position)
 		reverse_query.exclude = exclude_bodies
+		reverse_query.collision_mask = _collision_mask
 		reverse_hit = space_state.intersect_ray(reverse_query)  # Assign to the declared variable
 		if reverse_hit:
 			var reverse_collision_id = _get_fast_collision_id(reverse_hit)
