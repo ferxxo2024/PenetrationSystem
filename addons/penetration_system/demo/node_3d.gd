@@ -16,7 +16,6 @@ func _physics_process(_delta: float) -> void:
 		#NOTE: Uncomment this block to display the time spent processing
 		#var start: int = Time.get_ticks_usec()
 		
-		G_PenetrationSystem.debug_draw = true
 		G_PenetrationSystem.fire_bullet(ray_cast_3d.global_transform.origin, direction, 4, G_PenetrationSystem.penetration_data)
 		
 		#var end: int = Time.get_ticks_usec()

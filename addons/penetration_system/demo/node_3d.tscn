@@ -1,11 +1,11 @@
 [gd_scene load_steps=17 format=3 uid="uid://c84s5rmfq7bq1"]
 
-[ext_resource type="Script" uid="uid://b3c6ers1qeekh" path="res://addons/penetration_system/demo/node_3d.gd" id="1_i5arm"]
-[ext_resource type="Texture2D" uid="uid://bs5dpf7o0iflk" path="res://addons/penetration_system/demo/textures/texture_04.png" id="2_jka67"]
-[ext_resource type="Script" uid="uid://dynj4y4wou8no" path="res://addons/penetration_system/demo/scripts/camera_3d.gd" id="3_r3fl7"]
-[ext_resource type="Script" uid="uid://dw07kvw2k22u0" path="res://addons/penetration_system/demo/scripts/csg_combiner_3d.gd" id="5_i5arm"]
-[ext_resource type="Texture2D" uid="uid://bxyo6baecmre1" path="res://addons/penetration_system/demo/textures/texture_10.png" id="5_wc5p8"]
-[ext_resource type="Texture2D" uid="uid://b82ltyweef1rt" path="res://addons/penetration_system/demo/textures/texture_07.png" id="7_wc5p8"]
+[ext_resource type="Script" uid="uid://uuxqm5uacnmp" path="res://addons/penetration_system/demo/node_3d.gd" id="1_i5arm"]
+[ext_resource type="Texture2D" uid="uid://bqvyi21lqpfgt" path="res://addons/penetration_system/demo/textures/texture_04.png" id="2_jka67"]
+[ext_resource type="Script" uid="uid://by4kf4wp613q8" path="res://addons/penetration_system/demo/scripts/camera_3d.gd" id="3_r3fl7"]
+[ext_resource type="Script" uid="uid://bcremavyposj5" path="res://addons/penetration_system/demo/scripts/csg_combiner_3d.gd" id="5_i5arm"]
+[ext_resource type="Texture2D" uid="uid://dn86ap5jb8ayx" path="res://addons/penetration_system/demo/textures/texture_10.png" id="5_wc5p8"]
+[ext_resource type="Texture2D" uid="uid://dpx188v64w88s" path="res://addons/penetration_system/demo/textures/texture_07.png" id="7_wc5p8"]
 
 [sub_resource type="Sky" id="Sky_r3fl7"]
 

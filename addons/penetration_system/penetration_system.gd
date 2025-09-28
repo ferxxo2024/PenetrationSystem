@@ -180,7 +180,7 @@ func _fire_penetration_ray(origin: Vector3, direction: Vector3, remaining_penetr
 		if reverse_hit and reverse_hit.get(&"rid", RID()) == hit_rid:
 			exit_position = reverse_hit.position  # Assign to the declared variable
 			thickness = exit_position.distance_to(hit_position)
-			thickness_adjusted_damage = current_damage * _calculate_thickness_damage(thickness, penetration_info)
+			thickness_adjusted_damage = current_damage * _calculate_thickness_damage(thickness, penetration_info, remaining_power)
 	
 	# Apply damage with thickness consideration
 	apply_damage(collider, thickness_adjusted_damage, hit_position)
@@ -224,7 +224,7 @@ func _fire_penetration_ray(origin: Vector3, direction: Vector3, remaining_penetr
 		var thickness_to_next_object = hit_position.distance_to(forward_hit.position)
 		
 		if thickness_to_next_object <= current_max_thickness:
-			var thickness_damage_multiplier = _calculate_thickness_damage(thickness_to_next_object, penetration_info)
+			var thickness_damage_multiplier = _calculate_thickness_damage(thickness_to_next_object, penetration_info, remaining_power)
 			var partial_thickness_adjusted_damage = current_damage * thickness_damage_multiplier
 			
 			var penetration_cost = (thickness_to_next_object / penetration_info.max_thickness) * penetration_info.penetration_cost
@@ -281,18 +281,25 @@ func apply_damage(collider: Object, damage: float, hit_position: Vector3) -> voi
 		var impulse_dir = (hit_position - collider.global_transform.origin).normalized()
 		collider.apply_impulse(impulse_dir * damage * 0.05, hit_position)
 
-# Calculate damage multiplier based on thickness and material hardness
-func _calculate_thickness_damage(thickness: float, penetration_info: Dictionary) -> float:
-	# Higher penetration_cost = more damage reduction from thickness
-	# thickness_ratio: 0.0 (thin) to 1.0 (max thickness)
-	var thickness_ratio = thickness / penetration_info.max_thickness
-	var hardness_factor = penetration_info.penetration_cost / 2.0  # Normalize cost
+# Calculate damage multiplier based on material thickness, hardness and bullet power
+func _calculate_thickness_damage(thickness: float, penetration_info: Dictionary, bullet_power: float = 1.0) -> float:
+	# Calculate maximum effective penetration thickness considering bullet power
+	# More powerful bullets can penetrate thicker materials
+	var max_effective_thickness = penetration_info.max_thickness * bullet_power
+
+	# Thickness ratio: 0.0 (very thin) - 1.0 (maximum penetrable thickness)
+	var thickness_ratio = thickness / max_effective_thickness
 	
-	# Exponential damage reduction: thicker materials reduce damage more
-	# Soft materials (low cost) have less reduction, hard materials (high cost) have more
-	var damage_multiplier = 1.0 - (thickness_ratio * hardness_factor * 0.5)
+	# Adjust material hardness based on bullet power
+	# Powerful bullets penetrate hard materials more easily
+	var adjusted_hardness = penetration_info.penetration_cost / (bullet_power * 0.7 + 0.3)
 	
-	# Clamp to reasonable values
+	# Calculate final damage multiplier:
+	# - Thicker materials and higher hardness cause more damage loss
+	# - More powerful bullets reduce damage loss
+	var damage_multiplier = 1.0 - (thickness_ratio * adjusted_hardness * 0.3)
+
+	# Clamp multiplier to reasonable values (10%-100%)
 	return clamp(damage_multiplier, 0.1, 1.0)
 
 func draw_ray(_from: Vector3, _to: Vector3, _color: Color = Color.RED) -> void:
