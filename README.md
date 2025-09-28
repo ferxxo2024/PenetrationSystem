@@ -25,6 +25,7 @@ Performance-optimized for real-time use. Benchmark results (3 penetration levels
 * 1 projectile × 3 penetrations — ~0.070–0.130 ms/frame
 
 *Note: Higher penetration count require more calculations (for rays and other parameters). This dependency is non-linear, similar to the relationship with the number of shots per frame.*
+
 *Note: Benchmarking was performed inside the editor*
 
 ## Usage
