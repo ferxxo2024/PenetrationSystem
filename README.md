@@ -48,9 +48,9 @@ func _shoot():
     var direction: Vector3 = PenetrationSystem.get_raycast_global_direction(ray_cast_3d)
 
     var _damage : float = 20.0 # Base damage
-	 var _distance : float = 20.0 # Max distance 
-	 var _bullet_power : float = 1.0 
-	 var _max_penetrations_count : int = 3
+    var _distance : float = 20.0 # Max distance 
+    var _bullet_power : float = 1.0 
+    var _max_penetrations_count : int = 3
 
     # Setup parametres 
     G_PenetrationSystem.setup_bullet_params(_damage, _distance, _bullet_power, _max_penetrations_count)
@@ -86,9 +86,9 @@ func _shoot_advanced():
     var direction : Vector3 = PenetrationSystem.get_raycast_global_direction(ray_cast_3d)
     
     var _damage : float = 20.0 # Base damage
-	 var _distance : float = 20.0 # Max distance 
-	 var _bullet_power : float = 1.0
-	 var _max_penetrations_count : int = 3
+    var _distance : float = 20.0 # Max distance 
+    var _bullet_power : float = 1.0
+    var _max_penetrations_count : int = 3
 
     # Setup parametres 
     G_PenetrationSystem.setup_bullet_params(_damage, _distance, _bullet_power, _max_penetrations_count)
