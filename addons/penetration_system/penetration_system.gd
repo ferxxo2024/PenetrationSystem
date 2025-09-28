@@ -36,7 +36,8 @@ class_name PenetrationSystem
 
 @export var base_damage: float = 10.0
 @export var max_distance: float = 5.0
-@export var _max_penetrations: int = 4
+@export var bullet_power : float = 1.0
+@export var max_penetrations: int = 4
 @export var min_damage_threshold: float = 0.1  # Stop if damage falls below this value
 
 @export var penetration_data = {
@@ -59,14 +60,19 @@ class_name PenetrationSystem
 
 var exclude_bodies : Array[RID]
 
-func fire_bullet(origin: Vector3, direction: Vector3, max_penetrations: int, _penetration_data: Dictionary):
+func setup_bullet_params(p_base_damage: float = 20.0, p_max_distance: float = 20.0, p_bullet_power: float = 1.0, p_max_penetrations: int = 3, p_min_damage: float = 0.1):
+	base_damage = p_base_damage; max_distance = p_max_distance
+	bullet_power = p_bullet_power; max_penetrations = p_max_penetrations
+	min_damage_threshold = p_min_damage
+
+func fire_bullet(origin: Vector3, direction: Vector3, p_max_penetrations: int, _penetration_data: Dictionary):
 	var bullet_direction: Vector3 = direction.normalized()
 	
 	# Use dictionary to track damaged collisions instead of RID
 	var hit_collisions: Dictionary[int, bool] = {}  # Key: collision_id, Value: true
 	
-	_fire_penetration_ray(origin, bullet_direction, max_penetrations, 
-						 base_damage, 0.0, hit_collisions, 1.0, _penetration_data)
+	_fire_penetration_ray(origin, bullet_direction, p_max_penetrations, 
+						 base_damage, 0.0, hit_collisions, bullet_power, _penetration_data)
 
 func _fire_penetration_ray(origin: Vector3, direction: Vector3, remaining_penetrations: int,
 						  current_damage: float, traveled_distance: float, 
@@ -83,7 +89,7 @@ func _fire_penetration_ray(origin: Vector3, direction: Vector3, remaining_penetr
 	if remaining_penetrations < 0 or traveled_distance >= max_distance or remaining_power <= 0:
 		if debug_output:
 			print("Result: penetrations %d, damage %.1f, distance %.1f, remaining power: %.3f" % 
-				  [_max_penetrations - remaining_penetrations, current_damage, traveled_distance, remaining_power])
+				  [max_penetrations - remaining_penetrations, current_damage, traveled_distance, remaining_power])
 		return
 	
 	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(
@@ -100,7 +106,7 @@ func _fire_penetration_ray(origin: Vector3, direction: Vector3, remaining_penetr
 	if result.is_empty():
 		if debug_output:
 			print("Result: penetrations %d, damage %.1f, distance %.1f, remaining power: %.3f" % 
-				  [_max_penetrations - remaining_penetrations, current_damage, traveled_distance, remaining_power])
+				  [max_penetrations - remaining_penetrations, current_damage, traveled_distance, remaining_power])
 		return
 	
 	var hit_position: Vector3 = result.position
@@ -183,7 +189,7 @@ func _fire_penetration_ray(origin: Vector3, direction: Vector3, remaining_penetr
 	if remaining_penetrations <= 0:
 		if debug_output:
 			print("Result: penetrations %d, damage %.1f, distance %.1f, remaining power: %.3f" % 
-				  [_max_penetrations - remaining_penetrations, thickness_adjusted_damage, new_traveled_distance, remaining_power])
+				  [max_penetrations - remaining_penetrations, thickness_adjusted_damage, new_traveled_distance, remaining_power])
 		return
 	
 	# Penetration check (without RID exclusion)
@@ -246,7 +252,7 @@ func _fire_penetration_ray(origin: Vector3, direction: Vector3, remaining_penetr
 	
 	if debug_output:
 		print("Result: penetrations %d, damage %.1f, distance %.1f, remaining power: %.3f" % 
-			  [_max_penetrations - remaining_penetrations, thickness_adjusted_damage, new_traveled_distance, remaining_power])
+			  [max_penetrations - remaining_penetrations, thickness_adjusted_damage, new_traveled_distance, remaining_power])
 
 # Create unique ID for collision based on position and RID
 func _get_fast_collision_id(collision_result: Dictionary) -> int:
