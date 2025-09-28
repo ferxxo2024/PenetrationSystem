@@ -66,14 +66,14 @@ func _shoot():
 # G_PenetrationSystem - autoload/singleton
 var custom_materials = {
     "glass": {
-        "max_thickness": 0.8, # Maximum penetration thickness of one object
-        "damage_multiplier": 0.9, # Base Penetration Damage Multiplier
-        "penetration_cost": 0.2 # Hardness of the material, how much the bullet's force and damage will decrease after penetration
+        &"max_thickness": 0.8, # Maximum penetration thickness of one object
+        &"damage_multiplier": 0.9, # Base Penetration Damage Multiplier
+        &"penetration_cost": 0.2 # Hardness of the material, how much the bullet's force and damage will decrease after penetration
     },
     "armor": {
-        "max_thickness": 0.05,
-        "damage_multiplier": 0.1,
-        "penetration_cost": 5.0
+        &"max_thickness": 0.05,
+        &"damage_multiplier": 0.1,
+        &"penetration_cost": 5.0
     }
 }
 
