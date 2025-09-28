@@ -16,15 +16,16 @@ https://github.com/user-attachments/assets/93f6dd95-38ff-462b-9120-626388da3e35
 - **Customizable**: Easy to configure material properties and penetration rules, with code that can be easily modified to add additional features like ricochet
 
 ## Performance
-The system is optimized for real-time use. Below are typical performance metrics for different shot counts with 3rd-level penetration:
+Performance-optimized for real-time use. Benchmark results (3 penetration levels):
 
 
-* **1024 shots with 3rd-level penetration** — ~45–49 ms per frame
-* **512 shots with 3rd-level penetration** — ~12.9–22 ms per frame
-* **8 shots with 3rd-level penetration** — ~0.37 ms per frame
-* **1 shot with 3rd-level penetration** — ~0.070–0.130 ms per frame
+* 1024 projectiles × 3 penetrations — ~45–49 ms/frame
+* 512 projectiles × 3 penetrations — ~12.9–22 ms/frame
+* 8 projectiles × 3 penetrations — ~0.37 ms/frame  
+* 1 projectile × 3 penetrations — ~0.070–0.130 ms/frame
 
 *Note: Higher penetration count require more calculations (for rays and other parameters). This dependency is non-linear, similar to the relationship with the number of shots per frame.*
+*Note: Benchmarking was performed inside the editor*
 
 ## Usage
 
@@ -44,10 +45,14 @@ The system is optimized for real-time use. Below are typical performance metrics
 func _shoot():
     var origin: Vector3 = self.global_position
     var direction: Vector3 = PenetrationSystem.get_raycast_global_direction(ray_cast_3d)
-    var max_penetrations: int = 3
 
-    G_PenetrationSystem.base_damage = 30.0
-    G_PenetrationSystem.max_distance = 15.0
+    var _damage : float = 20.0 # Base damage
+	 var _distance : float = 20.0 # Max distance 
+	 var _bullet_power : float = 1.0 
+	 var _max_penetrations_count : int = 3
+
+    # Setup parametres 
+    G_PenetrationSystem.setup_bullet_params(_damage, _distance, _bullet_power, _max_penetrations_count)
 
     # Call the penetration system
     G_PenetrationSystem.fire_bullet(origin, direction, max_penetrations, G_PenetrationSystem.penetration_data)
@@ -60,9 +65,9 @@ func _shoot():
 # G_PenetrationSystem - autoload/singleton
 var custom_materials = {
     "glass": {
-        "max_thickness": 0.8,
-        "damage_multiplier": 0.9,
-        "penetration_cost": 0.2
+        "max_thickness": 0.8, # Maximum penetration thickness of one object
+        "damage_multiplier": 0.9, # Base Penetration Damage Multiplier
+        "penetration_cost": 0.2 # Hardness of the material, how much the bullet's force and damage will decrease after penetration
     },
     "armor": {
         "max_thickness": 0.05,
@@ -78,10 +83,14 @@ G_PenetrationSystem.penetration_data = custom_materials
 func _shoot_advanced():
     var origin : Vector3 = self.global_position
     var direction : Vector3 = PenetrationSystem.get_raycast_global_direction(ray_cast_3d)
-    var max_penetrations : int = 3
+    
+    var _damage : float = 20.0 # Base damage
+	 var _distance : float = 20.0 # Max distance 
+	 var _bullet_power : float = 1.0
+	 var _max_penetrations_count : int = 3
 
-    G_PenetrationSystem.base_damage = 30.0
-    G_PenetrationSystem.max_distance = 15.0
+    # Setup parametres 
+    G_PenetrationSystem.setup_bullet_params(_damage, _distance, _bullet_power, _max_penetrations_count)
 
     # Call the penetration system
     G_PenetrationSystem.fire_bullet(origin, direction, max_penetrations, custom_materials)
