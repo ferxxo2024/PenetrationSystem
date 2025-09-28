@@ -24,7 +24,7 @@ The system is optimized for real-time use. Below are typical performance metrics
 * **8 shots with 3rd-level penetration** — ~0.37 ms per frame
 * **1 shot with 3rd-level penetration** — ~0.070–0.130 ms per frame
 
-*Note: Higher penetration levels require more calculations (for rays and other parameters). This dependency is non-linear, similar to the relationship with the number of shots per frame.*
+*Note: Higher penetration count require more calculations (for rays and other parameters). This dependency is non-linear, similar to the relationship with the number of shots per frame.*
 
 ## Usage
 
