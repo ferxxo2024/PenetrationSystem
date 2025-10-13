@@ -56,7 +56,7 @@ func _shoot():
     G_PenetrationSystem.setup_bullet_params(_damage, _distance, _bullet_power, _max_penetrations_count)
 
     # Call the penetration system
-    G_PenetrationSystem.fire_bullet(origin, direction, max_penetrations, G_PenetrationSystem.penetration_data)
+    G_PenetrationSystem.fire_bullet(origin, direction, _max_penetrations_count, G_PenetrationSystem.penetration_data)
 ```
 
 ### Advanced Usage
@@ -94,7 +94,7 @@ func _shoot_advanced():
     G_PenetrationSystem.setup_bullet_params(_damage, _distance, _bullet_power, _max_penetrations_count)
 
     # Call the penetration system
-    G_PenetrationSystem.fire_bullet(origin, direction, max_penetrations, custom_materials)
+    G_PenetrationSystem.fire_bullet(origin, direction, _max_penetrations_count, custom_materials)
 ```
 
 ### Damage Handling
